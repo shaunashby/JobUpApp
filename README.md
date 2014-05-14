@@ -1,6 +1,6 @@
 # JobUpApp
 
-TODO: Write a gem description
+This Gem allows a simple web application to access the search results from my `JobUpScraper` project.
 
 ## Installation
 
