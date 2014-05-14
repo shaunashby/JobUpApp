@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = JobUpApp::VERSION
   spec.authors       = ["Shaun Ashby"]
   spec.email         = ["Shaun.Ashby@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{Provide a simple web application to access JobUp search results.}
+  spec.summary       = %q{A web application to access JobUp search results.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
