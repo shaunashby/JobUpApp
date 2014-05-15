@@ -1,6 +1,8 @@
 # JobUpApp
 
-This Gem allows a simple web application to access the search results from my `JobUpScraper` project.
+A web front-end to JobUpScraper. And an excuse to use Backbone.js.
+This Gem allows a simple web application to access the search results 
+from my `JobUpScraper` project.
 
 ## Installation
 
