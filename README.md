@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+This gem is designed to be run as a web application, via Rack.
 
 ## Contributing
 
