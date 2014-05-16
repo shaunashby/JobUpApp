@@ -21,4 +21,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rack"
+  spec.add_development_dependency, :git => 'https://github.com/shaunashby/JobUpScraper.git', :ref => 'e5d0b'
 end
