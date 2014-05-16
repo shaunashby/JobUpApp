@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Shaun Ashby"]
   spec.email         = ["Shaun.Ashby@gmail.com"]
   spec.description   = %q{Provide a simple web application to access JobUp search results.}
-  spec.summary       = %q{A web application to access JobUp search results.}
+  spec.summary       = "JobUpApp-#{spec.version}"
   spec.homepage      = ""
   spec.license       = "MIT"
 
