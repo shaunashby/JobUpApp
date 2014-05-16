@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.description   = %q{Provide a simple web application to access JobUp search results.}
   spec.summary       = "JobUpApp-#{spec.version}"
   spec.homepage      = ""
-  spec.license       = "MIT"
+  spec.license       = "GPLv3"
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
