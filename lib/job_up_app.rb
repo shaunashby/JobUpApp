@@ -1,9 +1,23 @@
 require 'job_up_app/version'
+require 'job_up/search'
+require 'job_up'
+
 require 'sinatra'
 
 module JobUpApp
 
+  def self.setup
+    configuration = JobUp::Configuration.new({})
+    searches = configuration.jobsearches
+    return {
+      :configuration => configuration,
+      :searches      => searches
+    }
+  end
+
   class Application < Sinatra::Base
+    JobUpApp.setup()
+
     configure :development do
       enable :logging
     end
