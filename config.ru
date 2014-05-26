@@ -19,4 +19,8 @@ Bundler.require
 
 require 'job_up_app'
 
+use Rack::Static,
+:urls => ["/images", "/js", "/css"],
+:root => "public"
+
 run JobUpApp::Application
