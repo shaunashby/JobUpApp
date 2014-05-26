@@ -26,6 +26,12 @@ module JobUpApp
       set :views, settings.root + '/../templates'
     end
 
+    before do
+    end
+
+    after do
+    end
+
     get "/" do
       logger.info "This is JobUpApp Web Interface Version #{JobUpApp::VERSION}."
       logger.info "Setup: #{config[:searches].length} searches configured."
