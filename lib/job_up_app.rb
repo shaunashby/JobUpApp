@@ -1,5 +1,5 @@
-require "job_up_app/version"
-require "sinatra"
+require 'job_up_app/version'
+require 'sinatra'
 
 module JobUpApp
 
