@@ -16,7 +16,7 @@ module JobUpApp
   end
 
   class Application < Sinatra::Base
-    JobUpApp.setup()
+    config=JobUpApp.setup()
 
     configure :development do
       enable :logging
