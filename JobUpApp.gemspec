@@ -21,6 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "nokogiri"
   spec.add_dependency "json"
   spec.add_dependency "sinatra"
+  spec.add_dependency "redis"
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
@@ -28,4 +29,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "nokogiri"
   spec.add_development_dependency "json"
   spec.add_development_dependency "thin"
+  spec.add_development_dependency "redis"
 end
