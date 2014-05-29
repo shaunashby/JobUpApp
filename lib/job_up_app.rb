@@ -16,6 +16,7 @@ module JobUpApp
   end
 
   class Application < Sinatra::Base
+    set :environment, :development
 
     def initialize
       super
