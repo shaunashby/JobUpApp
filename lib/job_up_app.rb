@@ -24,7 +24,8 @@ module JobUpApp
       set :views, settings.root + '/../templates'
     end
 
-    before do
+    before '/api/*' do
+      headers "X-JobUpApp-API-Version" => JobUpApp::VERSION
     end
 
     after do
