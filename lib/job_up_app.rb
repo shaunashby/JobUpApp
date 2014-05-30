@@ -33,7 +33,7 @@ module JobUpApp
       set :views, settings.root + '/../templates'
     end
 
-    before '/api/*' do
+    before '/' do
       headers "X-JobUpApp-API-Version" => JobUpApp::VERSION
       @searches.each do |search|
         redis_search_key = sprintf(REDIS_SEARCH_KEY_FORMAT, search.id)
