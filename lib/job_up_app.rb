@@ -22,6 +22,7 @@ module JobUpApp
       @configuration = JobUp::Configuration.new({})
       @searches = @configuration.jobsearches
       @version = JobUpApp::VERSION
+      @json = nil
     end
 
     configure :development do
