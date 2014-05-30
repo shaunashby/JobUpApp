@@ -2,6 +2,8 @@ require 'job_up_app/version'
 require 'job_up/search'
 require 'job_up'
 
+require 'json'
+
 require 'sinatra'
 
 module JobUpApp
@@ -33,6 +35,11 @@ module JobUpApp
 
     get "/" do
       erb "index.html".to_sym
+    end
+
+    # API methods:
+    get "/api/searches" do
+      @searches.to_json
     end
 
   end
