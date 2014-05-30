@@ -6,21 +6,14 @@ require 'sinatra'
 
 module JobUpApp
 
-  def self.setup
-    configuration = JobUp::Configuration.new({})
-    searches = configuration.jobsearches
-    return {
-      :configuration => configuration,
-      :searches      => searches
-    }
-  end
-
   class Application < Sinatra::Base
     set :environment, :development
 
     def initialize
       super
-      @config = JobUpApp.setup()
+      @configuration = JobUp::Configuration.new({})
+      @searches = @configuration.jobsearches
+      @version = JobUpApp::VERSION
     end
 
     configure :development do
