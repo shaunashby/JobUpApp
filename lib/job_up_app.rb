@@ -12,11 +12,13 @@ module JobUpApp
 
     REDIS_HOST='10.1.38.2'
     REDIS_DB=10
+    REDIS_SEARCH_KEY_FORMAT="result:search:%d"
 
     set :environment, :development
 
     def initialize
       super
+      @redis = Redis.new(:host => REDIS_HOST, :password => REDIS_PASSWD, :db => REDIS_DB)
       @configuration = JobUp::Configuration.new({})
       @searches = @configuration.jobsearches
       @version = JobUpApp::VERSION
@@ -32,6 +34,16 @@ module JobUpApp
 
     before '/api/*' do
       headers "X-JobUpApp-API-Version" => JobUpApp::VERSION
+      @searches.each do |search|
+        redis_search_key = sprintf(REDIS_SEARCH_KEY_FORMAT, search.id)
+        if !@redis.exists(redis_search_key)
+          headers "X-JobUpApp-Search-Time" => "#{Time.now.to_i}"
+          @json = JobUp::Search.getJSON(@configuration.base_url, search.query_params)
+          @redis.set(redis_search_key, @json)
+        else
+          @json = JSON.parse(@redis.get(redis_search_key))
+        end
+      end
     end
 
     after do
