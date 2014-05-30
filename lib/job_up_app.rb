@@ -32,8 +32,6 @@ module JobUpApp
     end
 
     get "/" do
-      logger.info "This is JobUpApp Web Interface Version #{JobUpApp::VERSION}."
-      logger.info "Setup: #{@config[:searches].length} searches configured."
       erb "index.html".to_sym
     end
 
