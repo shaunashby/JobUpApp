@@ -3,12 +3,16 @@ require 'job_up/search'
 require 'job_up'
 
 require 'json'
-
+require 'redis'
 require 'sinatra'
 
 module JobUpApp
 
   class Application < Sinatra::Base
+
+    REDIS_HOST='10.1.38.2'
+    REDIS_DB=10
+
     set :environment, :development
 
     def initialize
