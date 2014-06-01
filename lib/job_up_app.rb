@@ -27,6 +27,7 @@ module JobUpApp
 
     configure :development do
       enable :logging
+      enable :sessions
       set :sessions, :domain => '.ashby.ch'
       # Change the location of the templates which is otherwise obtained
       # from the file containing the application class:
