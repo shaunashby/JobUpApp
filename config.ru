@@ -18,9 +18,14 @@ require 'bundler'
 Bundler.require
 
 require 'job_up_app'
+require 'job_up_app/job_cache'
 
 use Rack::Static,
 :urls => ["/images", "/js", "/css"],
 :root => "public"
+
+# Middleware to handle Redis data:
+use JobUpApp::JobCache,
+:scraper_config => 'jobsearch.yml'
 
 run JobUpApp::Application
