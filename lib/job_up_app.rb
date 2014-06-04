@@ -1,3 +1,16 @@
+#!/usr/bin/env ruby
+#____________________________________________________________________
+# File: job_up_app.rb
+#____________________________________________________________________
+#
+# Author: Shaun Ashby <shaun@ashby.ch>
+# Created: 2014-05-14 23:23:05+0200
+# Revision: $Id$
+# Description: Sinatra application to run a UI for job search results.
+#
+# Copyright: 2014 (C) Shaun Ashby
+#
+#--------------------------------------------------------------------
 require 'job_up_app/version'
 require 'job_up/search'
 require 'job_up'
