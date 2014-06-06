@@ -68,7 +68,11 @@ module JobUpApp
       erb "index.html".to_sym
     end
 
-    # API methods:
+    # API methods to access results by search ID:
+    get "/api/jobs/:search_id" do
+    end
+
+    # API methods to access search configuration data:
     get "/api/searches" do
       @searches.to_json
     end
