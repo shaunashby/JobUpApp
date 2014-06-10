@@ -12,12 +12,22 @@
 //
 //--------------------------------------------------------------------
 
-$(function(){
-     // Models:
-     var JobSearch = Backbone.Model.extend({
-     });
-      // Views:
+var jobsearch = {
+	models: {},
+	views: {},
+};
 
-      // Collections:
-
-}).call();
+// Models:
+jobsearch.Search = Backbone.Model.extend({
+	urlRoot:"/api/searches",
+	initialize: function() {
+		this.searches = new jobsearch.SearchCollection();
+		this.searches.url = this.urlRoot +"/" + this.id;
+	},
+});
+// Views:
+// Collections:
+jobsearch.SearchCollection = Backbone.Collection.extend({
+	model: jobsearch.Search,
+	url:"/api/searches",
+});
