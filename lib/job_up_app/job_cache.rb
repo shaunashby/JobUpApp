@@ -32,7 +32,7 @@ module JobUpApp
     end
 
     def call(env)
-      $stderr.print("Got an app of type #{@app.class}\n")
+      env['jobupapp.context'] = MyContext.new
       @app.call(env)
     end
   end
