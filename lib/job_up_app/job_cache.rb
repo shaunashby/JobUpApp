@@ -15,6 +15,14 @@
 
 module JobUpApp
   class JobCache
+    # Temporary context object
+    class MyContext
+      def initialize(context=[])
+        @context=context
+      end
+      attr_reader :context
+    end
+
     def initialize(app,*options)
       @app = app
       @options = options || { }
