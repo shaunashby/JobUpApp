@@ -18,14 +18,6 @@ require 'job_up'
 
 module JobUpApp
   class JobCache
-    # Temporary context object
-    class MyContext
-      def initialize(context=[])
-        @context=context
-      end
-      attr_reader :context
-    end
-
     def initialize(app, options)
       @app = app
       @configuration = JobUp::Configuration.new(options[:config])
