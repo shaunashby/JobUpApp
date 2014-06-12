@@ -12,11 +12,8 @@
 #
 #--------------------------------------------------------------------
 require 'job_up_app/version'
-require 'job_up/search'
-require 'job_up'
 
 require 'json'
-require 'redis'
 require 'sinatra'
 
 module JobUpApp
@@ -31,9 +28,6 @@ module JobUpApp
 
     def initialize
       super
-      @redis = Redis.new(:host => REDIS_HOST, :password => REDIS_PASSWD, :db => REDIS_DB)
-      @configuration = JobUp::Configuration.new({})
-      @searches = @configuration.jobsearches
       @version = JobUpApp::VERSION
       @json = nil
     end
