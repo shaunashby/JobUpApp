@@ -68,11 +68,13 @@ module JobUpApp
 
     # API methods to access search configuration data:
     get "/api/searches" do
+      @searches = env['jobupapp.searches']
       headers "Content-Type" => "application/json"
       @searches.to_json
     end
 
     get "/api/search/:id" do
+      @searches = env['jobupapp.searches']
       search = @searches.select { |jobsearch| jobsearch.id == params[:id].to_i }
       if search.empty?
         logger.warn("Unable to find search with id #{params[:id]}")
