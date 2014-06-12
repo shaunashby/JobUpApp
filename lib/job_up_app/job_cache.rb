@@ -41,7 +41,7 @@ module JobUpApp
         :db       => 10
       }
 
-      cache_handle = Redis.new(:host => :redis_host, :password => :redis_passwd, :db => :redis_db)
+      cache_handle = Redis.new(redis_opts)
       env['jobupapp.cache_handle'] = cache_handle
       @app.call(env)
     end
