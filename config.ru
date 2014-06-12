@@ -26,6 +26,6 @@ use Rack::Static,
 
 # Middleware to handle Redis data:
 use JobUpApp::JobCache,
-:scraper_config => 'jobsearch.yml'
+:config => 'jobsearch.yml'
 
 run JobUpApp::Application
