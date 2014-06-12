@@ -35,9 +35,11 @@ module JobUpApp
     def call(env)
       # Initialize the context and store an access
       # point to a redis instance:
-      :redis_host = '10.1.38.2'
-      :redis_passwd = ''
-      :redis_db = 10
+      redis_opts = {
+        :host     => '10.1.38.2',
+        :password => '',
+        :db       => 10
+      }
 
       cache_handle = Redis.new(:host => :redis_host, :password => :redis_passwd, :db => :redis_db)
       env['jobupapp.cache_handle'] = cache_handle
