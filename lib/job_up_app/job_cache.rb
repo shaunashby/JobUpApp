@@ -43,6 +43,7 @@ module JobUpApp
 
       cache_handle = Redis.new(redis_opts)
       env['jobupapp.cache_handle'] = cache_handle
+      env['jobupapp.searches'] = @searches
       @app.call(env)
     end
   end
