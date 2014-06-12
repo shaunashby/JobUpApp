@@ -12,6 +12,9 @@
 #
 #
 #--------------------------------------------------------------------
+require 'redis'
+require 'job_up/search'
+require 'job_up'
 
 module JobUpApp
   class JobCache
@@ -23,16 +26,21 @@ module JobUpApp
       attr_reader :context
     end
 
-    def initialize(app,*options)
+    def initialize(app, *options)
       @app = app
-      @options = options || { }
-      @options.each do |o|
-        $stderr.print("initialize -- Got option #{o}\n")
-      end
+      @configuration = JobUp::Configuration.new(options['config'])
+      @searches = @configuration.jobsearches
     end
 
     def call(env)
-      env['jobupapp.context'] = MyContext.new
+      # Initialize the context and store an access
+      # point to a redis instance:
+      :redis_host = '10.1.38.2'
+      :redis_passwd = ''
+      :redis_db = 10
+
+      cache_handle = Redis.new(:host => :redis_host, :password => :redis_passwd, :db => :redis_db)
+      env['jobupapp.cache_handle'] = cache_handle
       @app.call(env)
     end
   end
