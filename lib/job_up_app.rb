@@ -75,7 +75,7 @@ module JobUpApp
     get "/api/search/:id" do
       search = @searches.select { |jobsearch| jobsearch.id == params[:id].to_i }
       if search.empty?
-        logger.warn "Unable to find search with id #{params[:id]}"
+        logger.warn("Unable to find search with id #{params[:id]}")
         halt 400, {'Content-Type' => 'application/json'}, 'nil'
       end
       search.to_json
