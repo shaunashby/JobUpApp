@@ -26,9 +26,9 @@ module JobUpApp
       attr_reader :context
     end
 
-    def initialize(app, *options)
+    def initialize(app, options)
       @app = app
-      @configuration = JobUp::Configuration.new(options['config'])
+      @configuration = JobUp::Configuration.new(options[:config])
       @searches = @configuration.jobsearches
     end
 
