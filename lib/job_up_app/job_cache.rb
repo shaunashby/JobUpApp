@@ -24,6 +24,7 @@ module JobUpApp
 
     def initialize(app, options)
       @app = app
+      @timestamp = nil
       @configuration = JobUp::Configuration.new(options[:config])
       @searches = @configuration.jobsearches
     end
