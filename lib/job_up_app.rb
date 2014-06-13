@@ -20,10 +20,6 @@ module JobUpApp
 
   class Application < Sinatra::Base
 
-    REDIS_HOST='10.1.38.2'
-    REDIS_DB=10
-    REDIS_SEARCH_KEY_FORMAT="result:search:%d"
-
     set :environment, :development
 
     def initialize
