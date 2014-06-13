@@ -27,20 +27,38 @@ module JobUpApp
       @timestamp = nil
       @configuration = JobUp::Configuration.new(options[:config])
       @searches = @configuration.jobsearches
-    end
 
-    def call(env)
-      # Initialize the context and store an access
-      # point to a redis instance:
       redis_opts = {
         :host     => '10.1.38.2',
         :password => '',
         :db       => 10
       }
 
-      cache_handle = Redis.new(redis_opts)
-      env['jobupapp.cache_handle'] = cache_handle
+      @cache_handle = Redis.new(redis_opts)
+    end
+
+    def cache_stale?
+      if @timestamp.nil?
+        return true
+      else
+        return (Time.now.to_i - @timestamp > CACHE_REFRESH_TIME) ? true : false
+      end
+    end
+
+    def call(env)
+      env['jobupapp.cache_handle'] = @cache_handle
       env['jobupapp.searches'] = @searches
+
+      if cache_stale?
+        env['rack.errors'].puts("JobUpApp::JobCache#call: refreshing cache.")
+        # Do whatever is required to populate the cache:
+
+        # Reset the timestamp for the cache:
+        @timestamp = Time.now.to_i
+      else
+        env['rack.errors'].puts("JobUpApp::JobCache#call: cache state OK.")
+      end
+
       @app.call(env)
     end
   end
