@@ -18,6 +18,10 @@ require 'job_up'
 
 module JobUpApp
   class JobCache
+
+    CACHE_SEARCH_KEY_FORMAT="result:search:%d"
+    CACHE_REFRESH_TIME = 4 * 60 * 60 # 4 hrs
+
     def initialize(app, options)
       @app = app
       @configuration = JobUp::Configuration.new(options[:config])
