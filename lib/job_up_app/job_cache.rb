@@ -50,9 +50,18 @@ module JobUpApp
       env['jobupapp.searches'] = @searches
 
       if cache_stale?
-        env['rack.errors'].puts("JobUpApp::JobCache#call: refreshing cache.")
+        env['rack.errors'].puts("JobUpApp::JobCache: Refreshing cache.")
         # Do whatever is required to populate the cache:
-
+        @searches.each do |search|
+          cache_search_key = sprintf(CACHE_SEARCH_KEY_FORMAT, search.id)
+          if @cache_handle.exists(cache_search_key)
+            # Save current data or simply delete and re-run search (TBD):
+            env['rack.errors'].puts("JobUpApp::JobCache: Key #{cache_search_key} exists. Deleting before refreshing cache.")
+          else
+            @json_data = JobUp::Search.getJSON(@configuration.base_url, search.query_params)
+            @cache_handle.set(cache_search_key, @json_data)
+          end
+        end
         # Reset the timestamp for the cache:
         @timestamp = Time.now.to_i
       else
