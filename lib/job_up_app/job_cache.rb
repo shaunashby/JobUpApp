@@ -46,6 +46,12 @@ module JobUpApp
     end
 
     def call(env)
+      req = Rack::Request.new(env)
+
+      if req.get?
+        env['rack.errors'].puts("JobUpApp::JobCache: GET request on path #{req.path_info}.")
+      end
+
       env['jobupapp.cache_handle'] = @cache_handle
       env['jobupapp.searches'] = @searches
 
