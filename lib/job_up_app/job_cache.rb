@@ -74,6 +74,9 @@ module JobUpApp
         env['rack.errors'].puts("JobUpApp::JobCache#call: cache state OK.")
       end
 
+      res = Rack::Response.new
+      res.set_cookie("cache_updated", @timestamp)
+
       @app.call(env)
     end
   end
