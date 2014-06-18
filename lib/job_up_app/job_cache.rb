@@ -65,6 +65,9 @@ module JobUpApp
             env['rack.errors'].puts("JobUpApp::JobCache: Key #{cache_search_key} exists. Deleting before refreshing cache.")
             @cache_handle.del(cache_search_key)
           end
+          # Store updated JSON string:
+          @json_data = JobUp::Search.getJSON(@configuration.base_url, search.query_params)
+          @cache_handle.set(cache_search_key, @json_data)
         end
         # Reset the timestamp for the cache:
         @timestamp = Time.now.to_i
