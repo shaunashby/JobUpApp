@@ -39,7 +39,8 @@ module JobUpApp
       set :views, settings.root + '/../templates'
     end
 
-    before '/' do
+    # Set headers on all calls to API methods which return JSON:
+    before '/api/jobs/:search_id' do
       headers "X-JobUpApp-API-Version" => JobUpApp::VERSION
       @searches.each do |search|
         redis_search_key = sprintf(REDIS_SEARCH_KEY_FORMAT, search.id)
