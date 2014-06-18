@@ -77,6 +77,7 @@ module JobUpApp
 
       res = Rack::Response.new
       res.set_cookie("cache_updated", @timestamp)
+      res.finish
 
       @app.call(env)
     end
