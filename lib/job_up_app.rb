@@ -42,16 +42,7 @@ module JobUpApp
     # Set headers on all calls to API methods which return JSON:
     before '/api/jobs/:search_id' do
       headers "X-JobUpApp-API-Version" => JobUpApp::VERSION
-      @searches.each do |search|
-        redis_search_key = sprintf(REDIS_SEARCH_KEY_FORMAT, search.id)
-        if !@redis.exists(redis_search_key)
-          headers "X-JobUpApp-Search-Time" => "#{Time.now.to_i}"
-          @json = JobUp::Search.getJSON(@configuration.base_url, search.query_params)
-          @redis.set(redis_search_key, @json)
-        else
-          @json = JSON.parse(@redis.get(redis_search_key))
-        end
-      end
+      headers "Content-Type"           => "application/json"
     end
 
     after do
