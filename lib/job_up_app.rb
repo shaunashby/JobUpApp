@@ -20,6 +20,8 @@ module JobUpApp
 
   class Application < Sinatra::Base
 
+    CACHE_SEARCH_KEY_FORMAT="result:search:%d"
+
     set :environment, :development
 
     def initialize
@@ -60,6 +62,9 @@ module JobUpApp
 
     # API methods to access results by search ID:
     get "/api/jobs/:search_id" do
+      cache_search_key = sprintf(CACHE_SEARCH_KEY_FORMAT, params[:searchid])
+      @json = JSON.parse( env['jobupapp.cache_handle'].get(cache_search_key) )
+      @json
     end
 
     # API methods to access search configuration data:
