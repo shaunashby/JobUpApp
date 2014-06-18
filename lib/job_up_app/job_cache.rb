@@ -63,9 +63,7 @@ module JobUpApp
           if @cache_handle.exists(cache_search_key)
             # Save current data or simply delete and re-run search (TBD):
             env['rack.errors'].puts("JobUpApp::JobCache: Key #{cache_search_key} exists. Deleting before refreshing cache.")
-          else
-            @json_data = JobUp::Search.getJSON(@configuration.base_url, search.query_params)
-            @cache_handle.set(cache_search_key, @json_data)
+            @cache_handle.del(cache_search_key)
           end
         end
         # Reset the timestamp for the cache:
