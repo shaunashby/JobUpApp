@@ -63,7 +63,6 @@ module JobUpApp
 
     # API methods to access search configuration data:
     get "/api/searches" do
-      headers "Content-Type" => "application/json"
       env['jobupapp.searches'].to_json
     end
 
