@@ -70,8 +70,6 @@ module JobUpApp
         end
         # Reset the timestamp for the cache:
         @timestamp = Time.now.to_i
-      else
-        env['rack.errors'].puts("JobUpApp::JobCache#call: cache state OK.")
       end
 
       res = Rack::Response.new
