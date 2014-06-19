@@ -47,7 +47,7 @@ module JobUpApp
     before '/api/jobs/:search_id' do
     end
 
-    before '/api/searches/:id' do
+    before '/api/search/:id' do
     end
 
     get "/" do
