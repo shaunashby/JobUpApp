@@ -16,11 +16,10 @@ require 'redis'
 require 'job_up/search'
 require 'job_up'
 
+require 'job_up_app/cache'
+
 module JobUpApp
   class JobCache
-
-    CACHE_SEARCH_KEY_FORMAT="result:search:%d"
-    CACHE_REFRESH_TIME = 4 * 60 * 60 # 4 hrs
 
     def initialize(app, options)
       @app = app
@@ -41,7 +40,7 @@ module JobUpApp
       if @timestamp.nil?
         return true
       else
-        return (Time.now.to_i - @timestamp > CACHE_REFRESH_TIME) ? true : false
+        return (Time.now.to_i - @timestamp > JobUpApp::Cache::REFRESH_TIME) ? true : false
       end
     end
 
@@ -59,7 +58,7 @@ module JobUpApp
         env['rack.errors'].puts("JobUpApp::JobCache: Refreshing cache.")
         # Do whatever is required to populate the cache:
         @searches.each do |search|
-          cache_search_key = sprintf(CACHE_SEARCH_KEY_FORMAT, search.id)
+          cache_search_key = sprintf(JobUpApp::Cache::RESULTS_SEARCH_KEY_FORMAT, search.id)
           if @cache_handle.exists(cache_search_key)
             # Save current data or simply delete and re-run search (TBD):
             env['rack.errors'].puts("JobUpApp::JobCache: Key #{cache_search_key} exists. Deleting before refreshing cache.")

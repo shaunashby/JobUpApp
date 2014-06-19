@@ -12,6 +12,7 @@
 #
 #--------------------------------------------------------------------
 require 'job_up_app/version'
+require 'job_up_app/cache'
 
 require 'json'
 require 'sinatra'
@@ -19,8 +20,6 @@ require 'sinatra'
 module JobUpApp
 
   class Application < Sinatra::Base
-
-    CACHE_SEARCH_KEY_FORMAT="result:search:%d"
 
     set :environment, :development
 
@@ -57,7 +56,7 @@ module JobUpApp
 
     # API methods to access results by search ID:
     get "/api/jobs/:search_id" do
-      cache_search_key = sprintf(CACHE_SEARCH_KEY_FORMAT, params[:search_id])
+      cache_search_key = sprintf(JobUpApp::Cache::RESULTS_SEARCH_KEY_FORMAT, params[:search_id])
       @json = JSON.parse( env['jobupapp.cache_handle'].get(cache_search_key) ).to_s
     end
 
