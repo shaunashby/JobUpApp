@@ -56,9 +56,8 @@ module JobUpApp
 
     # API methods to access results by search ID:
     get "/api/jobs/:search_id" do
-      cache_search_key = sprintf(CACHE_SEARCH_KEY_FORMAT, params[:searchid])
-      @json = JSON.parse( env['jobupapp.cache_handle'].get(cache_search_key) )
-      @json
+      cache_search_key = sprintf(CACHE_SEARCH_KEY_FORMAT, params[:search_id])
+      @json = JSON.parse( env['jobupapp.cache_handle'].get(cache_search_key) ).to_s
     end
 
     # API methods to access search configuration data:
