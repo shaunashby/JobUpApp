@@ -39,15 +39,16 @@ module JobUpApp
       set :views, settings.root + '/../templates'
     end
 
-    # Set headers on all calls to API methods which return JSON:
-    before '/api/jobs/:search_id' do
-      headers "X-JobUpApp-API-Version" => JobUpApp::VERSION
+    # Set headers on all calls to API methods (which return JSON):
+    before '/api/*' do
       headers "Content-Type"           => "application/json"
+      headers "X-JobUpApp-API-Version" => JobUpApp::VERSION
+    end
+
+    before '/api/jobs/:search_id' do
     end
 
     before '/api/searches/:id' do
-      headers "X-JobUpApp-API-Version" => JobUpApp::VERSION
-      headers "Content-Type"           => "application/json"
     end
 
     get "/" do
