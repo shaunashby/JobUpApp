@@ -23,7 +23,7 @@ jobsearch.Search = Backbone.Model.extend({
 	initialize: function() {
 		this.searches = new jobsearch.SearchCollection();
 		this.searches.url = this.urlRoot +"/" + this.id;
-	},
+	}
 });
 // Views:
 // Collections:
