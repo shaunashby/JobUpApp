@@ -79,5 +79,25 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/jobupapp.js"></script>
+    <!-- Templates for Backbone -->
+    <script type="text/template" id="search-results-template">
+      <div class="page-header">
+        <h1>{{ header }}</h1>
+      </div>
+
+      <div class="panel panel-default">
+	<!-- Default panel contents -->
+	<div class="panel-heading">{{ panelHeading }}</div>
+	<div class="panel-body">
+	  <p>{{ panelBodyTitle }} </p>
+	</div>
+
+	<!-- List group -->
+	<ul class="list-group">
+	  <li class="list-group-item">{{ item }}</li>
+	</ul>
+      </div>
+    </script>
+
   </body>
 </html>
