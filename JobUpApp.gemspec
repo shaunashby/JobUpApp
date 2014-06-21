@@ -30,4 +30,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "json"
   spec.add_development_dependency "thin"
   spec.add_development_dependency "redis"
+  spec.add_development_dependency "rack-test"
+  spec.add_development_dependency "rspec"
 end
