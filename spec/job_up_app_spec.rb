@@ -26,19 +26,19 @@ describe "JobUp application" do
     expect(last_response.body).to match(/JobUpApp/)
   end
 
-  it "should route /api/jobs/:search_id correctly" do
-    get "/api/jobs/:search_id"
-    expect(last_response).to be_ok
-  end
-
   it "should route /api/searches correctly" do
     get "/api/searches"
     expect(last_response).to be_ok
   end
 
+  it "should route /api/jobs/:search_id correctly" do
+    get "/api/jobs/354346.json"
+    expect(last_response).to be_ok
+  end
+
   it "should route /api/search/:id correctly" do
-    get "/api/search/:id"
-    expect(last_reponse).to be_ok
+    get "/api/search/354346.json"
+    expect(last_response).to be_ok
   end
 
 end
