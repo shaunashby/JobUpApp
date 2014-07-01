@@ -45,9 +45,13 @@ module JobUpApp
     end
 
     before '/api/jobs/:search_id' do
+      headers "Content-Type"           => "application/json"
+      headers "X-JobUpApp-API-Version" => JobUpApp::VERSION
     end
 
     before '/api/search/:id' do
+      headers "Content-Type"           => "application/json"
+      headers "X-JobUpApp-API-Version" => JobUpApp::VERSION
     end
 
     get "/" do
