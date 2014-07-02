@@ -61,7 +61,12 @@ module JobUpApp
     # API methods to access results by search ID:
     get "/api/jobs/:search_id" do
       cache_search_key = sprintf(JobUpApp::Cache::RESULTS_SEARCH_KEY_FORMAT, params[:search_id])
-      @json = JSON.parse( env['jobupapp.cache_handle'].get(cache_search_key) ).to_s
+      if env.has_key?('jobupapp.cache_handle')
+        @json = JSON.parse( env['jobupapp.cache_handle'].get(cache_search_key) ).to_s
+      else
+        data = { :success => false, :data => nil }
+        data.to_json
+      end
     end
 
     # API methods to access search configuration data:
@@ -75,13 +80,18 @@ module JobUpApp
     end
 
     get "/api/search/:id" do
-      @searches = env['jobupapp.searches']
-      search = @searches.select { |jobsearch| jobsearch.id == params[:id].to_i }
-      if search.empty?
-        logger.warn("Unable to find search with id #{params[:id]}")
-        halt 400, {'Content-Type' => 'application/json'}, 'nil'
+      if env.has_key?('jobupapp.searches')
+        @searches = env['jobupapp.searches']
+        search = @searches.select { |jobsearch| jobsearch.id == params[:id].to_i }
+        if search.empty?
+          logger.warn("Unable to find search with id #{params[:id]}")
+          halt 400, {'Content-Type' => 'application/json'}, { :success => false, :data => nil }.to_json
+        end
+        search.to_json
+      else
+        data = { :success => false, :data => nil }
+        data.to_json
       end
-      search.to_json
     end
 
   end
