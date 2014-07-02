@@ -34,13 +34,16 @@ describe "JobUp application" do
   end
 
   it "should route /api/jobs/:search_id correctly" do
-    get "/api/jobs/354346.json"
-    expect(last_response).to be_ok
+    get "/api/jobs/354346"
+    expect(last_response['X-JobUpApp-API-Version']).to eq("0.0.1")
+    expect(last_response['Content-Type']).to eq("application/json")
+    expect(last_response.body).to match(/data/)
   end
 
   it "should route /api/search/:id correctly" do
-    get "/api/search/354346.json"
-    expect(last_response).to be_ok
+    get "/api/search/354346"
+    expect(last_response['X-JobUpApp-API-Version']).to eq("0.0.1")
+    expect(last_response['Content-Type']).to eq("application/json")
   end
 
 end
