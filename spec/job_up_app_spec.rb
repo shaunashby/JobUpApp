@@ -30,6 +30,7 @@ describe "JobUp application" do
     get "/api/searches"
     expect(last_response['X-JobUpApp-API-Version']).to eq("0.0.1")
     expect(last_response['Content-Type']).to eq("application/json")
+    expect(last_response.body).to match(/data/)
   end
 
   it "should route /api/jobs/:search_id correctly" do
