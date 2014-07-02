@@ -66,7 +66,12 @@ module JobUpApp
 
     # API methods to access search configuration data:
     get "/api/searches" do
-      env['jobupapp.searches'].to_json
+      if env.has_key?('jobupapp.searches')
+        env['jobupapp.searches'].to_json
+      else
+        data = { :success => false, :data => nil }
+        data.to_json
+      end
     end
 
     get "/api/search/:id" do
