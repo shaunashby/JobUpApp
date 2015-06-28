@@ -65,7 +65,9 @@ module JobUpApp
             @cache_handle.del(cache_search_key)
           end
           # Store updated JSON string:
-          @json_data = JobUp::Search.getJSON(@configuration.base_url, search.query_params)
+          scraper = JobUp::Search.new(@configuration.base_url, search.query_params)
+          scraper.run()
+          @json_data = scraper.getJSON
           @cache_handle.set(cache_search_key, @json_data)
         end
         # Reset the timestamp for the cache:
